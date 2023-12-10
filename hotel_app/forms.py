@@ -1,6 +1,8 @@
 # forms.py
 
 from django import forms
+from django.utils import timezone
+from django.forms import ValidationError
 from .models import Reserva, Habitacion, TipoHabitacion
 
 class ReservaForm(forms.ModelForm):
@@ -29,6 +31,13 @@ class ReservaForm(forms.ModelForm):
 
             if habitaciones_disponibles.exists():
                 raise ValidationError('La habitación no está disponible en las fechas seleccionadas.')
+            
+            # Verificar si la fecha de salida es menor que la fecha de llegada
+            if fecha_salida < fecha_llegada:
+                raise forms.ValidationError('La fecha de salida no puede ser anterior a la fecha de llegada.')
+            # Verificar si la fecha de llegada es menor que la fecha actual
+            if fecha_llegada < timezone.now().date():
+                raise forms.ValidationError('La fecha de llegada no puede ser anterior a la fecha actual.')
 
     def clean_tipo_habitacion(self):
         tipo_habitacion = self.cleaned_data.get('tipo_habitacion')
@@ -41,6 +50,8 @@ class ReservaForm(forms.ModelForm):
 
         # Asigna la primera habitación disponible
         return habitaciones_disponibles.first().tipo
+        
+        
 
     def save(self, commit=True):
         # Obtiene la habitación seleccionada
@@ -51,7 +62,7 @@ class ReservaForm(forms.ModelForm):
         
         if not habitacion_disponible:
             raise ValueError('No hay habitaciones disponibles de este tipo.')
-
+        
         # Asigna la habitación seleccionada al objeto Reserva
         self.instance.habitacion = habitacion_disponible
         return super().save(commit)

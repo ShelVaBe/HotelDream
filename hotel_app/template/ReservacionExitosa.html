@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservación Exitosa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reservación Exitosa</h1>
+        <p>Información de la Reserva:</p>
+        <ul>
+            <li><strong>Habitación:</strong> {{ reserva.habitacion }}</li>
+            <li><strong>Huésped:</strong> {{ reserva.huesped }}</li>
+            <li><strong>Fecha de Llegada:</strong> {{ reserva.fecha_llegada }}</li>
+            <li><strong>Fecha de salida:</strong> {{ reserva.fecha_salida }}</li>
+            <li><strong>Total a pagar:</strong> {{ reserva.total_pagar }}</li>
+            <li><strong>Prepago de la reservación:</strong> {{ reserva.monto_pagado }}</li>
+        </ul>
+    </div>
+</body>
+</html>

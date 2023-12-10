@@ -40,6 +40,7 @@ class Reserva(models.Model):
     fecha_salida = models.DateField()
     tipo_pago = models.ForeignKey(TipoPago, on_delete=models.CASCADE)
     tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE, null=True, blank=True)
+    total_pagar = models.DecimalField(max_digits=10, decimal_places=2, default=0)  
     monto_pagado = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     def save(self, *args, **kwargs):
         # Calcula el total_pagar antes de guardar la reserva

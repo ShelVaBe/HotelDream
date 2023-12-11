@@ -1,6 +1,0 @@
-usuario-->nombre, apellido, correo electronico, numero de telefono
-habitación --> tipo, numero, costo
-tipo habitacion--> nombre, capacidad
-reservacion --> usuario, habitacion, dia de llegada, dia que se va, numero de personas, costo total, tipo de pago, anticipo
-tipo de pago--> transferencia, tajeta debito, credito, paypal
-
